@@ -102,7 +102,7 @@ for q, text in questions.items():
     answer = st.radio(
         f"**{q}**\n{text}",
         ["A", "B", "C", "D", "E", "F", "G"],
-        horizontal=True
+        
     )
     user_answers.append(answer)
 
