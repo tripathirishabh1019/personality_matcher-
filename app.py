@@ -63,7 +63,7 @@ questions = {
 # STREAMLIT UI
 # ============================================================
 
-st.title("🕉️ Mahabharata Personality Quiz (No ML Version)")
+st.title("🕉️ Mahabharata Personality Matcher ")
 st.write("Answer 5 questions to discover which Mahabharata character matches your personality.")
 
 user_answers = []
