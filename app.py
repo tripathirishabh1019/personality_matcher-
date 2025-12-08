@@ -41,7 +41,7 @@ mapping = {
 # ============================================================
 
 questions = {
-    Q1": "When facing a major conflict, your first instinct is to...\n"
+    "Q1": "When facing a major conflict, your first instinct is to...\n"
           "(A) Find a moral and just solution (Dharma).\n"
           "(B) Use my strength to solve it directly.\n"
           "(C) Analyze the situation and execute a precise, skilled plan.\n"
