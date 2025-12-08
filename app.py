@@ -1,29 +1,81 @@
 import streamlit as st
 
 # ============================================================
-# PERSONALITY DESCRIPTIONS
+# CUSTOM MAHABHARATA UI THEME
+# ============================================================
+
+page_bg = """
+<style>
+body {
+    background: #1c1c1c;
+    color: #f2e6c9;
+}
+
+section.main > div {
+    background-color: transparent !important;
+}
+
+h1, h2, h3, h4 {
+    color: #f7d794 !important;
+    text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.4);
+}
+
+.question-box {
+    padding: 20px;
+    background: rgba(50, 40, 20, 0.6);
+    border-radius: 12px;
+    border: 2px solid #d4a017;
+    margin-bottom: 25px;
+}
+
+.stRadio > div {
+    background: transparent !important;
+}
+
+.stRadio label {
+    font-size: 18px;
+    color: #f2e6c9 !important;
+}
+
+.stButton>button {
+    background-color: #d4a017;
+    color: black;
+    font-size: 20px;
+    padding: 12px 25px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.stButton>button:hover {
+    background-color: #f5c542;
+    color: black;
+    box-shadow: 0px 0px 15px gold;
+}
+</style>
+"""
+
+st.markdown(page_bg, unsafe_allow_html=True)
+
+# ============================================================
+# TITLE SECTION
+# ============================================================
+
+st.markdown("<h1 style='text-align:center;'>🕉️ Mahabharata Personality Matcher</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align:center;'>Discover which legendary hero your personality aligns with</h3><br>", unsafe_allow_html=True)
+
+# ============================================================
+# DESCRIPTIONS
 # ============================================================
 
 descriptions = {
-    "Yudhishthira": "You are 'The Just.' You value dharma, truth, and morality above all. "
-                    "You are righteous and calm, but this can make you seem passive or rigid at times.",
-    "Bhima": "You are 'The Strong.' You are a person of action, passion, and immense power. "
-             "You are fiercely protective, but your quick temper can sometimes be your downfall.",
-    "Arjuna": "You are 'The Skilled.' You are focused, disciplined, and a master of your craft. "
-              "You are driven by duty but can be prone to self-doubt and moral dilemmas.",
-    "Duryodhana": "You are 'The Ambitious.' You are a powerful leader with an unbreakable will. "
-                  "You are determined to get what you believe is yours, but this can stem from deep envy.",
-    "Karna": "You are 'The Loyal.' You are generous, powerful, and defined by your loyalty to those who helped you. "
-             "You have a tragic sense of honor, often sticking to your cause even when you know it's flawed.",
-    "Shakuni": "You are 'The Cunning.' You are highly intelligent, strategic, and see life as a game to be won. "
-               "You are a master manipulator, driven by a long-held grudge.",
-    "Krishna": "You are 'The Guide.' You are wise, charming, and see the 'bigger picture' that others miss. "
-               "You operate on a higher level, understanding that sometimes rules must be bent for a greater good."
+    "Yudhishthira": "You are 'The Just.' You value dharma, truth, and morality above all.",
+    "Bhima": "You are 'The Strong.' Passionate, protective, and fearless.",
+    "Arjuna": "You are 'The Skilled.' Disciplined, focused, and duty-driven.",
+    "Duryodhana": "You are 'The Ambitious.' Powerful, determined, and unbreakable.",
+    "Karna": "You are 'The Loyal.' Noble, generous, and bound by honor.",
+    "Shakuni": "You are 'The Cunning.' Strategic, witty, and sharp-minded.",
+    "Krishna": "You are 'The Guide.' Wise, insightful, and spiritually elevated."
 }
-
-# ============================================================
-# LETTER → PERSONALITY MAP
-# ============================================================
 
 mapping = {
     "A": "Yudhishthira",
@@ -36,90 +88,104 @@ mapping = {
 }
 
 # ============================================================
-# QUESTIONS (your exact same text)
+# QUESTIONS
 # ============================================================
 
 questions = {
-    "Q1": "When facing a major conflict, your first instinct is to...\n"
-          "(A) Find a moral and just solution (Dharma).\n"
-          "(B) Use my strength to solve it directly.\n"
-          "(C) Analyze the situation and execute a precise, skilled plan.\n"
-          "(D) Do whatever it takes to win and assert my claim.\n"
-          "(E) Stay loyal to my friends who have supported me, no matter the cost.\n"
-          "(F) Devise a clever or cunning strategy.\n"
-          "(G) See the 'bigger picture' and guide events from a higher perspective.",
-    
-    "Q2": "What do you value most in yourself?\n"
-          "(A) My integrity and truthfulness.\n"
-          "(B) My physical power and passion.\n"
-          "(C) My discipline and focused skill.\n"
-          "(D) My ambition and determination.\n"
-          "(E) My loyalty and generosity.\n"
-          "(F) My intelligence and strategic mind.\n"
-          "(G) My wisdom and ability to understand others.",
-    
-    "Q3": "A difficult personal dilemma arises. You are most likely to feel...\n"
-          "(A) Burdened by the weight of the 'right' choice.\n"
-          "(B) Impatient and ready for action.\n"
-          "(C) Conflicted, but focused on my duty.\n"
-          "(D) Deeply jealous or angry at the perceived injustice.\n"
-          "(E) A tragic sense of loyalty to a difficult cause.\n"
-          "(F) Amused, seeing it as a game to be won.\n"
-          "(G) Calm and detached, understanding the role I must play.",
-    
-    "Q4": "Your greatest strength is...\n"
-          "(A) My unwavering virtue.\n"
-          "(B) My immense physical power.\n"
-          "(C) My unmatched expertise in my field.\n"
-          "(D) My powerful will and leadership.\n"
-          "(E) My profound sense of gratitude and loyalty.\n"
-          "(F) My ability to out-think my opponents.\n"
-          "(G) My cosmic wisdom and charm.",
-    
-    "Q5": "People might criticize you for being...\n"
-          "(A) Too rigid, passive, or naive.\n"
-          "(B) Too rash or aggressive.\n"
-          "(C) Prone to ego or moral doubt.\n"
-          "(D) Envious and greedy.\n"
-          "(E) Blinded by your loyalties.\n"
-          "(F) Manipulative.\n"
-          "(G) Detached, mysterious, or a rule-breaker."
+    "Q1": "When facing a major conflict, your first instinct is to...",
+    "Q2": "What do you value most in yourself?",
+    "Q3": "A difficult personal dilemma arises. You are most likely to feel...",
+    "Q4": "Your greatest strength is...",
+    "Q5": "People might criticize you for being..."
+}
+
+options = {
+    "Q1": [
+        "A — Find a moral and just solution.",
+        "B — Use strength to solve it.",
+        "C — Analyze and plan precisely.",
+        "D — Do whatever it takes to win.",
+        "E — Stay loyal no matter what.",
+        "F — Create a clever strategy.",
+        "G — See the bigger cosmic picture."
+    ],
+    "Q2": [
+        "A — Integrity & truthfulness.",
+        "B — Strength & passion.",
+        "C — Discipline & skill.",
+        "D — Ambition & determination.",
+        "E — Loyalty & generosity.",
+        "F — Intelligence & strategy.",
+        "G — Wisdom & deep understanding."
+    ],
+    "Q3": [
+        "A — Burdened by choosing the right thing.",
+        "B — Impatient and ready for action.",
+        "C — Conflicted but focused on duty.",
+        "D — Angry at perceived injustice.",
+        "E — Loyal even to difficult causes.",
+        "F — Amused; it's a game to win.",
+        "G — Calm & detached with clarity."
+    ],
+    "Q4": [
+        "A — Unwavering virtue.",
+        "B — Immense physical power.",
+        "C — Unmatched expertise.",
+        "D — Leadership and willpower.",
+        "E — Gratitude & loyalty.",
+        "F — Outsmarting opponents.",
+        "G — Cosmic wisdom & charm."
+    ],
+    "Q5": [
+        "A — Too passive or naive.",
+        "B — Too aggressive.",
+        "C — Ego or doubt.",
+        "D — Envious or greedy.",
+        "E — Blinded by loyalty.",
+        "F — Manipulative.",
+        "G — Detached or mysterious."
+    ]
 }
 
 # ============================================================
-# STREAMLIT UI
+# INPUT SECTION
 # ============================================================
-
-st.title("🕉️ Mahabharata Personality Matcher")
-st.write("Answer 5 questions to reveal your Mahabharata personality.")
 
 user_answers = []
 
-st.header("📝 Your Choices")
+for q in questions:
+    st.markdown(f"<div class='question-box'><h3>{q}: {questions[q]}</h3></div>", unsafe_allow_html=True)
 
-# FIXED: Correct loop for your questions structure
-for q, text in questions.items():
-    answer = st.radio(
-        f"**{q}**\n{text}",
-        ["A", "B", "C", "D", "E", "F", "G"],
-        
+    selected = st.radio(
+        "",
+        options[q],
+        index=None
     )
-    user_answers.append(answer)
+
+    if selected:
+        user_answers.append(selected[0])  # Extract only A/B/C...
 
 # ============================================================
-# PREDICT PERSONALITY (PURE PYTHON)
+# PREDICT PERSONALITY
 # ============================================================
 
-if st.button("🔮 Reveal My Personality"):
+if st.button("🔮 Reveal My Mahabharata Personality"):
 
-    # Count letter votes
-    counts = {letter: 0 for letter in mapping.keys()}
-    for ans in user_answers:
-        counts[ans] += 1
+    if len(user_answers) < 5:
+        st.error("Please answer all 5 questions first.")
+    else:
+        # Count votes
+        counts = {letter: user_answers.count(letter) for letter in mapping.keys()}
 
-    # Get highest voted letter
-    predicted_letter = max(counts, key=counts.get)
-    predicted_personality = mapping[predicted_letter]
+        result_letter = max(counts, key=counts.get)
+        result_personality = mapping[result_letter]
 
-    st.subheader(f"✨ You match: **{predicted_personality}**")
-    st.success(descriptions[predicted_personality])
+        st.markdown(
+            f"<h2 style='text-align:center;'>✨ You match: <span style='color:#ffd700;'>{result_personality}</span></h2>",
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            f"<p style='font-size:20px; text-align:center;'>{descriptions[result_personality]}</p>",
+            unsafe_allow_html=True
+        )
