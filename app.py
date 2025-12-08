@@ -1,140 +1,96 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-from sklearn.preprocessing import OrdinalEncoder
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import joblib
-import random
-import warnings
-import os
 
-# -----------------------------
-# STEP 1: Train Model (Runs Once)
-# -----------------------------
-
-def generate_and_train_model():
-
-    personalities = [
-        'Yudhishthira', 'Bhima', 'Arjuna',
-        'Duryodhana', 'Karna', 'Shakuni', 'Krishna'
-    ]
-
-    base_answers = {
-        'Yudhishthira': ['A', 'A', 'A', 'A', 'A'],
-        'Bhima':        ['B', 'B', 'B', 'B', 'B'],
-        'Arjuna':       ['C', 'C', 'C', 'C', 'C'],
-        'Duryodhana':   ['D', 'D', 'D', 'D', 'D'],
-        'Karna':        ['E', 'E', 'E', 'E', 'E'],
-        'Shakuni':      ['F', 'F', 'F', 'F', 'F'],
-        'Krishna':      ['G', 'G', 'G', 'G', 'G']
-    }
-
-    quiz_data = []
-    all_answer_choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-
-    # Generate 210 samples
-    for person in personalities:
-        for _ in range(30):
-            answers = list(base_answers[person])
-            mutations = random.choice([0, 1, 1, 2])
-
-            if mutations > 0:
-                for _ in range(mutations):
-                    q = random.randint(0, 4)
-                    answers[q] = random.choice(all_answer_choices)
-
-            quiz_data.append(answers + [person])
-
-    df = pd.DataFrame(quiz_data, columns=["Q1","Q2","Q3","Q4","Q5","Personality"])
-
-    X = df.drop("Personality", axis=1)
-    y = df["Personality"]
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, stratify=y, random_state=42
-    )
-
-    categories = [['A','B','C','D','E','F','G']]*5
-    encoder = OrdinalEncoder(categories=categories)
-
-    X_train_enc = encoder.fit_transform(X_train)
-    X_test_enc = encoder.transform(X_test)
-
-    model = DecisionTreeClassifier(random_state=42)
-    model.fit(X_train_enc, y_train)
-
-    acc = accuracy_score(y_test, model.predict(X_test_enc))
-
-    joblib.dump(model, "mahabharata_model.joblib")
-    joblib.dump(encoder, "encoder.joblib")
-
-    return acc
-
-
-# -----------------------------
-# Step 2: Load Model
-# -----------------------------
-def load_model():
-    if not os.path.exists("mahabharata_model.joblib"):
-        generate_and_train_model()
-    model = joblib.load("mahabharata_model.joblib")
-    encoder = joblib.load("encoder.joblib")
-    return model, encoder
-
-
-# -----------------------------
-# Step 3: Streamlit UI
-# -----------------------------
-
-questions = {
-    "Q1": "When facing a major conflict, your first instinct is to...",
-    "Q2": "What do you value most in yourself?",
-    "Q3": "A difficult personal dilemma arises. You are most likely to feel...",
-    "Q4": "Your greatest strength is...",
-    "Q5": "People might criticize you for being..."
-}
-
-options = {
-    "A": "A",
-    "B": "B",
-    "C": "C",
-    "D": "D",
-    "E": "E",
-    "F": "F",
-    "G": "G"
-}
+# ============================================================
+# PERSONALITY DESCRIPTIONS
+# ============================================================
 
 descriptions = {
-    "Yudhishthira": "You are 'The Just.' You value dharma, truth, and morality above all.",
-    "Bhima": "You are 'The Strong.' Passionate and powerful, but quick-tempered.",
-    "Arjuna": "You are 'The Skilled.' Focused, disciplined and duty-driven.",
-    "Duryodhana": "You are 'The Ambitious.' A strong leader fueled by rivalry.",
-    "Karna": "You are 'The Loyal.' Defined by gratitude and loyalty.",
-    "Shakuni": "You are 'The Cunning.' Master strategist and thinker.",
-    "Krishna": "You are 'The Guide.' Wise, insightful and seeing the bigger picture."
+    "Yudhishthira": "You value truth, calmness, and justice above all.",
+    "Bhima": "You are bold, strong, passionate, and protect your people.",
+    "Arjuna": "Disciplined, focused, skilled and always striving for perfection.",
+    "Duryodhana": "Ambitious, powerful, determined, and fearless.",
+    "Karna": "Loyal, generous, tragic hero with a strong sense of duty.",
+    "Shakuni": "A clever strategist who always thinks 10 steps ahead.",
+    "Krishna": "Wise, charming, insightful, and a natural guide to others."
 }
 
-st.title("🔥 Mahabharata Personality Quiz")
-st.write("Answer 5 questions to discover your Mahabharata personality.")
+# ============================================================
+# LETTER → PERSONALITY MAP
+# ============================================================
 
-# Load model
-model, encoder = load_model()
+mapping = {
+    "A": "Yudhishthira",
+    "B": "Bhima",
+    "C": "Arjuna",
+    "D": "Duryodhana",
+    "E": "Karna",
+    "F": "Shakuni",
+    "G": "Krishna"
+}
+
+# ============================================================
+# QUESTIONS FOR THE QUIZ
+# ============================================================
+
+questions = {
+    "Q1": ("When facing conflict, your instinct is:",
+           ['A','B','C','D','E','F','G'],
+           ["Moral choice", "Use strength", "Plan carefully",
+            "Fight for claim", "Stay loyal", "Use strategy", "See bigger picture"]),
+    
+    "Q2": ("What do you value most in yourself?",
+           ['A','B','C','D','E','F','G'],
+           ["Integrity", "Power", "Skill", "Ambition",
+            "Loyalty", "Strategy", "Wisdom"]),
+    
+    "Q3": ("How do you act in dilemmas?",
+           ['A','B','C','D','E','F','G'],
+           ["Burdened by morals", "Impatient", "Duty-bound",
+            "Angry", "Loyal", "Strategic", "Calm & detached"]),
+    
+    "Q4": ("Your greatest strength:",
+           ['A','B','C','D','E','F','G'],
+           ["Virtue", "Power", "Skill mastery", "Leadership",
+            "Loyalty", "Intelligence", "Wisdom"]),
+    
+    "Q5": ("People criticize you for being:",
+           ['A','B','C','D','E','F','G'],
+           ["Too passive", "Aggressive", "Self-doubting",
+            "Greedy", "Blind loyalty", "Manipulative", "Detached"])
+}
+
+# ============================================================
+# STREAMLIT UI
+# ============================================================
+
+st.title("🕉️ Mahabharata Personality Quiz (No ML Version)")
+st.write("Answer 5 questions to discover which Mahabharata character matches your personality.")
 
 user_answers = []
 
-for q in questions:
-    ans = st.selectbox(q + ":", options.keys(), key=q)
+st.header("📝 Your Choices")
+
+for q, (text, letters, labels) in questions.items():
+    ans = st.radio(text, letters, format_func=lambda x: labels[letters.index(x)])
     user_answers.append(ans)
 
-if st.button("Predict My Personality"):
-    ans_array = np.array(user_answers).reshape(1, -1)
-    ans_enc = encoder.transform(ans_array)
+# ============================================================
+# PREDICT PERSONALITY (PURE PYTHON)
+# ============================================================
 
-    pred = model.predict(ans_enc)[0]
-    prob = model.predict_proba(ans_enc).max()
+if st.button("🔮 Reveal My Personality"):
 
-    st.subheader(f"Your Mahabharata Personality: **{pred}**")
-    st.write(f"Confidence: {prob*100:.2f}%")
-    st.info(descriptions[pred])
+    # Count each letter user selected
+    counts = {letter: 0 for letter in mapping.keys()}
+
+    for ans in user_answers:
+        counts[ans] += 1
+
+    # Find highest voted letter
+    predicted_letter = max(counts, key=counts.get)
+
+    # Map to personality
+    predicted_personality = mapping[predicted_letter]
+
+    st.subheader(f"✨ You match: **{predicted_personality}**")
+    st.success(descriptions[predicted_personality])
