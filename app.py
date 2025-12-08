@@ -85,7 +85,7 @@ questions = {
           "(E) Blinded by your loyalties.\n"
           "(F) Manipulative.\n"
           "(G) Detached, mysterious, or a rule-breaker.\n"
-          "Your choice (A-G): "
+          "Your choice (A-G):"
 }
 
 # ============================================================
