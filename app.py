@@ -32,7 +32,7 @@ mapping = {"
     "D": "Duryodhana",
     "E": "Karna",
     "F": "Shakuni",
-    "G": "Krishna,
+    "G": "Krishna",
     "
 }
 
