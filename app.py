@@ -25,7 +25,7 @@ descriptions = {
 # LETTER → PERSONALITY MAP
 # ============================================================
 
-mapping = {"
+mapping = {
     "A": "Yudhishthira",
     "B": "Bhima",
     "C": "Arjuna",
@@ -33,7 +33,7 @@ mapping = {"
     "E": "Karna",
     "F": "Shakuni",
     "G": "Krishna",
-    "
+    
 }
 
 # ============================================================
