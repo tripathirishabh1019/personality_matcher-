@@ -5,27 +5,35 @@ import streamlit as st
 # ============================================================
 
 descriptions = {
-    "Yudhishthira": "You value truth, calmness, and justice above all.",
-    "Bhima": "You are bold, strong, passionate, and protect your people.",
-    "Arjuna": "Disciplined, focused, skilled and always striving for perfection.",
-    "Duryodhana": "Ambitious, powerful, determined, and fearless.",
-    "Karna": "Loyal, generous, tragic hero with a strong sense of duty.",
-    "Shakuni": "A clever strategist who always thinks 10 steps ahead.",
-    "Krishna": "Wise, charming, insightful, and a natural guide to others."
+        "Yudhishthira": "You are 'The Just.' You value dharma, truth, and morality above all. "
+                    "You are righteous and calm, but this can make you seem passive or rigid at times.",
+    "Bhima": "You are 'The Strong.' You are a person of action, passion, and immense power. "
+             "You are fiercely protective, but your quick temper can sometimes be your downfall.",
+    "Arjuna": "You are 'The Skilled.' You are focused, disciplined, and a master of your craft. "
+              "You are driven by duty but can be prone to self-doubt and moral dilemmas.",
+    "Duryodhana": "You are 'The Ambitious.' You are a powerful leader with an unbreakable will. "
+                  "You are determined to get what you believe is yours, but this can stem from deep envy.",
+    "Karna": "You are 'The Loyal.' You are generous, powerful, and defined by your loyalty to those who helped you. "
+             "You have a tragic sense of honor, often sticking to your cause even when you know it's flawed.",
+    "Shakuni": "You are 'The Cunning.' You are highly intelligent, strategic, and see life as a game to be won. "
+               "You are a master manipulator, driven by a long-held grudge.",
+    "Krishna": "You are 'The Guide.' You are wise, charming, and see the 'bigger picture' that others miss. "
+               "You operate on a higher level, understanding that sometimes rules must be bent for a greater good."
 }
 
 # ============================================================
 # LETTER → PERSONALITY MAP
 # ============================================================
 
-mapping = {
+mapping = {"
     "A": "Yudhishthira",
     "B": "Bhima",
     "C": "Arjuna",
     "D": "Duryodhana",
     "E": "Karna",
     "F": "Shakuni",
-    "G": "Krishna"
+    "G": "Krishna,
+    "
 }
 
 # ============================================================
@@ -33,30 +41,51 @@ mapping = {
 # ============================================================
 
 questions = {
-    "Q1": ("When facing conflict, your instinct is:",
-           ['A','B','C','D','E','F','G'],
-           ["Moral choice", "Use strength", "Plan carefully",
-            "Fight for claim", "Stay loyal", "Use strategy", "See bigger picture"]),
-    
-    "Q2": ("What do you value most in yourself?",
-           ['A','B','C','D','E','F','G'],
-           ["Integrity", "Power", "Skill", "Ambition",
-            "Loyalty", "Strategy", "Wisdom"]),
-    
-    "Q3": ("How do you act in dilemmas?",
-           ['A','B','C','D','E','F','G'],
-           ["Burdened by morals", "Impatient", "Duty-bound",
-            "Angry", "Loyal", "Strategic", "Calm & detached"]),
-    
-    "Q4": ("Your greatest strength:",
-           ['A','B','C','D','E','F','G'],
-           ["Virtue", "Power", "Skill mastery", "Leadership",
-            "Loyalty", "Intelligence", "Wisdom"]),
-    
-    "Q5": ("People criticize you for being:",
-           ['A','B','C','D','E','F','G'],
-           ["Too passive", "Aggressive", "Self-doubting",
-            "Greedy", "Blind loyalty", "Manipulative", "Detached"])
+    Q1": "When facing a major conflict, your first instinct is to...\n"
+          "(A) Find a moral and just solution (Dharma).\n"
+          "(B) Use my strength to solve it directly.\n"
+          "(C) Analyze the situation and execute a precise, skilled plan.\n"
+          "(D) Do whatever it takes to win and assert my claim.\n"
+          "(E) Stay loyal to my friends who have supported me, no matter the cost.\n"
+          "(F) Devise a clever or cunning strategy.\n"
+          "(G) See the 'bigger picture' and guide events from a higher perspective.\n"
+          "Your choice (A-G): ",
+    "Q2": "What do you value most in yourself?\n"
+          "(A) My integrity and truthfulness.\n"
+          "(B) My physical power and passion.\n"
+          "(C) My discipline and focused skill.\n"
+          "(D) My ambition and determination.\n"
+          "(E) My loyalty and generosity.\n"
+          "(F) My intelligence and strategic mind.\n"
+          "(G) My wisdom and ability to understand others.\n"
+          "Your choice (A-G): ",
+    "Q3": "A difficult personal dilemma arises. You are most likely to feel...\n"
+          "(A) Burdened by the weight of the 'right' choice.\n"
+          "(B) Impatient and ready for action.\n"
+          "(C) Conflicted, but focused on my duty.\n"
+          "(D) Deeply jealous or angry at the perceived injustice.\n"
+          "(E) A tragic sense of loyalty to a difficult cause.\n"
+          "(F) Amused, seeing it as a game to be won.\n"
+          "(G) Calm and detached, understanding the role I must play.\n"
+          "Your choice (A-G): ",
+    "Q4": "Your greatest strength is...\n"
+          "(A) My unwavering virtue.\n"
+          "(B) My immense physical power.\n"
+          "(C) My unmatched expertise in my field (e.g., archery, arts).\n"
+          "(D) My powerful will and leadership.\n"
+          "(E) My profound sense of gratitude and loyalty.\n"
+          "(F) My ability to out-think my opponents.\n"
+          "(G) My cosmic wisdom and charm.\n"
+          "Your choice (A-G): ",
+    "Q5": "People might criticize you for being...\n"
+          "(A) Too rigid, passive, or naive.\n"
+          "(B) Too rash or aggressive.\n"
+          "(C) Prone to ego or moral doubt.\n"
+          "(D) Envious and greedy.\n"
+          "(E) Blinded by your loyalties.\n"
+          "(F) Manipulative.\n"
+          "(G) Detached, mysterious, or a rule-breaker.\n"
+          "Your choice (A-G): "
 }
 
 # ============================================================
