@@ -5,7 +5,7 @@ import streamlit as st
 # ============================================================
 
 descriptions = {
-        "Yudhishthira": "You are 'The Just.' You value dharma, truth, and morality above all. "
+    "Yudhishthira": "You are 'The Just.' You value dharma, truth, and morality above all. "
                     "You are righteous and calm, but this can make you seem passive or rigid at times.",
     "Bhima": "You are 'The Strong.' You are a person of action, passion, and immense power. "
              "You are fiercely protective, but your quick temper can sometimes be your downfall.",
@@ -32,12 +32,11 @@ mapping = {
     "D": "Duryodhana",
     "E": "Karna",
     "F": "Shakuni",
-    "G": "Krishna",
-    
+    "G": "Krishna"
 }
 
 # ============================================================
-# QUESTIONS FOR THE QUIZ
+# QUESTIONS (your exact same text)
 # ============================================================
 
 questions = {
@@ -48,8 +47,8 @@ questions = {
           "(D) Do whatever it takes to win and assert my claim.\n"
           "(E) Stay loyal to my friends who have supported me, no matter the cost.\n"
           "(F) Devise a clever or cunning strategy.\n"
-          "(G) See the 'bigger picture' and guide events from a higher perspective.\n"
-          "Your choice (A-G): ",
+          "(G) See the 'bigger picture' and guide events from a higher perspective.",
+    
     "Q2": "What do you value most in yourself?\n"
           "(A) My integrity and truthfulness.\n"
           "(B) My physical power and passion.\n"
@@ -57,8 +56,8 @@ questions = {
           "(D) My ambition and determination.\n"
           "(E) My loyalty and generosity.\n"
           "(F) My intelligence and strategic mind.\n"
-          "(G) My wisdom and ability to understand others.\n"
-          "Your choice (A-G): ",
+          "(G) My wisdom and ability to understand others.",
+    
     "Q3": "A difficult personal dilemma arises. You are most likely to feel...\n"
           "(A) Burdened by the weight of the 'right' choice.\n"
           "(B) Impatient and ready for action.\n"
@@ -66,17 +65,17 @@ questions = {
           "(D) Deeply jealous or angry at the perceived injustice.\n"
           "(E) A tragic sense of loyalty to a difficult cause.\n"
           "(F) Amused, seeing it as a game to be won.\n"
-          "(G) Calm and detached, understanding the role I must play.\n"
-          "Your choice (A-G): ",
+          "(G) Calm and detached, understanding the role I must play.",
+    
     "Q4": "Your greatest strength is...\n"
           "(A) My unwavering virtue.\n"
           "(B) My immense physical power.\n"
-          "(C) My unmatched expertise in my field (e.g., archery, arts).\n"
+          "(C) My unmatched expertise in my field.\n"
           "(D) My powerful will and leadership.\n"
           "(E) My profound sense of gratitude and loyalty.\n"
           "(F) My ability to out-think my opponents.\n"
-          "(G) My cosmic wisdom and charm.\n"
-          "Your choice (A-G): ",
+          "(G) My cosmic wisdom and charm.",
+    
     "Q5": "People might criticize you for being...\n"
           "(A) Too rigid, passive, or naive.\n"
           "(B) Too rash or aggressive.\n"
@@ -84,24 +83,28 @@ questions = {
           "(D) Envious and greedy.\n"
           "(E) Blinded by your loyalties.\n"
           "(F) Manipulative.\n"
-          "(G) Detached, mysterious, or a rule-breaker.\n"
-          "Your choice (A-G):"
+          "(G) Detached, mysterious, or a rule-breaker."
 }
 
 # ============================================================
 # STREAMLIT UI
 # ============================================================
 
-st.title("🕉️ Mahabharata Personality Matcher ")
-st.write("Answer 5 questions to discover which Mahabharata character matches your personality.")
+st.title("🕉️ Mahabharata Personality Matcher")
+st.write("Answer 5 questions to reveal your Mahabharata personality.")
 
 user_answers = []
 
 st.header("📝 Your Choices")
 
-for q, (text, letters, labels) in questions.items():
-    ans = st.radio(text, letters, format_func=lambda x: labels[letters.index(x)])
-    user_answers.append(ans)
+# FIXED: Correct loop for your questions structure
+for q, text in questions.items():
+    answer = st.radio(
+        f"**{q}**\n{text}",
+        ["A", "B", "C", "D", "E", "F", "G"],
+        horizontal=True
+    )
+    user_answers.append(answer)
 
 # ============================================================
 # PREDICT PERSONALITY (PURE PYTHON)
@@ -109,16 +112,13 @@ for q, (text, letters, labels) in questions.items():
 
 if st.button("🔮 Reveal My Personality"):
 
-    # Count each letter user selected
+    # Count letter votes
     counts = {letter: 0 for letter in mapping.keys()}
-
     for ans in user_answers:
         counts[ans] += 1
 
-    # Find highest voted letter
+    # Get highest voted letter
     predicted_letter = max(counts, key=counts.get)
-
-    # Map to personality
     predicted_personality = mapping[predicted_letter]
 
     st.subheader(f"✨ You match: **{predicted_personality}**")
