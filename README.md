@@ -68,36 +68,27 @@ Matplotlib
 
 Seaborn
 
-NLP Techniques:
-
-Text Cleaning
-
-Tokenization
-
-Stopword Removal
-
-TF-IDF Vectorization
-
-Machine Learning Models:
-
-Logistic Regression
-
-Naive Bayes
-
-Support Vector Machine (SVM)
-
-🔄 Project Workflow
-User Text Input
-      ↓
-Text Preprocessing
-      ↓
-TF-IDF Vectorization
-      ↓
-ML Model Training
-      ↓
-Prediction
-      ↓
-Mahabharat Character Matching
+NLP Techniques: Text Cleaning
+                Tokenization
+                Stopword Removal
+                TF-IDF Vectorization
+                
+Machine Learning Models:Logistic Regression
+                        Naive Bayes
+                        Support Vector Machine (SVM)
+ 
+                         🔄 Project Workflow
+                           User Text Input
+                                 ↓
+                         Text Preprocessing
+                                 ↓
+                         TF-IDF Vectorization
+                                 ↓
+                         ML Model Training
+                                 ↓
+                           Prediction
+                                ↓
+                 Mahabharat Character Matching
 
 🧪 Model Training & Evaluation
 
@@ -114,28 +105,18 @@ Classification Report
 Confusion Matrix
 
 ✅ Best Model Performance
-
-Achieved high accuracy on test data
-
-Model shows good generalization capability
+  .Achieved high accuracy on test data
+  .Model shows good generalization capability
 
 📊 Results & Insights
-
-The model successfully maps personality traits to characters
-
-NLP-based personality prediction is effective
-
-Cultural storytelling improves user engagement
-
-TF-IDF performed well for text representation
-
+   .The model successfully maps personality traits to characters
+   .NLP-based personality prediction is effective
+   .Cultural storytelling improves user engagement
+   .TF-IDF performed well for text representation
 📈 Visualizations
-
-Word frequency analysis
-
-Model comparison graphs
-
-Confusion matrix plots
+   .Word frequency analysis
+   .Model comparison graphs
+   .Confusion matrix plots
 
 (Visualizations are available inside the notebook)
 
@@ -152,20 +133,15 @@ Interactive AI chatbots
 Cultural & behavioral research
 
 🔮 Future Enhancements
-
-Use Deep Learning (LSTM / BERT)
-
-Add voice-based personality input
-
-Integrate web interface using Streamlit
-
-Improve dataset size and diversity
-
-Add multilingual support
+   Use Deep Learning (LSTM / BERT)
+   Add voice-based personality input
+   Integrate web interface using Streamlit
+   Improve dataset size and diversity
+   Add multilingual support
 
 👨‍🎓 Author
-
 Rishabh Tripathi
+
 🎓 Bachelor of Science in Data Science
 💡 Machine Learning | NLP | AI
 📫 Email:tripathirishabh7890@gmail.com
