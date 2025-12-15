@@ -123,13 +123,9 @@ Confusion Matrix
 🚀 Applications of This Project
 
 Personality assessment systems
-
 Educational psychology tools
-
 Mythology-based AI applications
-
 Interactive AI chatbots
-
 Cultural & behavioral research
 
 🔮 Future Enhancements
@@ -140,9 +136,10 @@ Cultural & behavioral research
    Add multilingual support
 
 👨‍🎓 Author
+
 Rishabh Tripathi
 
-🎓 Bachelor of Science in Data Science
-💡 Machine Learning | NLP | AI
-📫 Email:tripathirishabh7890@gmail.com
-🔗 LinkedIn: https://www.linkedin.com/in/rishabh-tripathi-b88940298/
+      🎓 Bachelor of Science in Data Science
+      💡 Machine Learning | NLP | AI
+      📫 Email:tripathirishabh7890@gmail.com
+     🔗 LinkedIn: https://www.linkedin.com/in/rishabh-tripathi-b88940298/
